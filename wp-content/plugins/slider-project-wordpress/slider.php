@@ -6,7 +6,7 @@ class Ma_Newsletter
 
     public function __construct()
     {
-        add_action('widgets_init', function(){register_widget('Ma_Newsletter_Widget');});
+        add_action('widgets_init', function(){register_widget('SliderWidgetAJBJ');});
     }
 }
 new Ma_Newsletter();
