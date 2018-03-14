@@ -66,7 +66,7 @@ class SliderWidgetAJBJ extends WP_Widget
         $positionTitle = ($positionTitle == "haut")?"top":"bottom";
 
         echo '
-        <div id="bloc_slider" style="width: '.$widthSlider.'px; '.$heightSlider.'px; margin: auto;">
+        <div id="bloc_slider" data-width="'.$widthSlider.'" data-height="'.$heightSlider.'" data-speed="'.$slideSpeed.'" style="width: '.$widthSlider.'px; '.$heightSlider.'px; margin: auto;">
             <div id="slide_fleche_gauche" class="slide_fleche" onClick=" return changeSlide_manuel(0);">
                 <span class="oi oi-chevron-left"></span>
             </div>

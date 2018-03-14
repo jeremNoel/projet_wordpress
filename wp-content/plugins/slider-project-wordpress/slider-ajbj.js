@@ -2,6 +2,10 @@ var contentSlides = document.getElementById("bloc_slider").getElementsByClassNam
 var position_slide = contentSlides.length-1;
 var nb_total_slide = position_slide;
 
+var widthSlider = document.getElementById("bloc_slider").getAttribute("data-width");
+var heightSlider = document.getElementById("bloc_slider").getAttribute("data-height");
+var speedSlider = document.getElementById("bloc_slider").getAttribute("data-speed");
+
 function setChange_toSlide(numberSlide, parameter){
     switch(parameter){
         case 0:
@@ -13,20 +17,20 @@ function setChange_toSlide(numberSlide, parameter){
             break;
         case 1:
             if(numberSlide%2 == 0){
-                contentSlides[numberSlide].style.width = "'.$widthSlider.'px";
+                contentSlides[numberSlide].style.width = widthSlider+"px";
             } else {
-                contentSlides[numberSlide].style.height = "'.$heightSlider.'px";
+                contentSlides[numberSlide].style.height = heightSlider+"px";
             }
             break;
-        default: alert(\'ERREUR 0XSL01\');
+        default: alert('ERREUR 0XSL01');
     }
 }
 
 function changeSlide(){
     if(position_slide == 0){
         for(var i=0; i < nb_total_slide+1; i++){
-            contentSlides[i].style.width = "'.$widthSlider.'px";
-            contentSlides[i].style.height = "'.$heightSlider.'px";
+            contentSlides[i].style.width = widthSlider+"px";
+            contentSlides[i].style.height = heightSlider+"px";
         }
         position_slide = nb_total_slide;
     } else {
@@ -35,7 +39,7 @@ function changeSlide(){
     }
 }
 
-var timerSlide = setInterval("changeSlide()", '.$slideSpeed.');
+var timerSlide = setInterval("changeSlide()", speedSlider);
 
 function changeSlide_manuel(direction){
     clearInterval(timerSlide);
@@ -60,8 +64,8 @@ function changeSlide_manuel(direction){
                 position_slide -= 1;
             } else if (position_slide == 0){
                 for(var i=0; i < nb_total_slide+1; i++){
-                    contentSlides[i].style.width = "'.$widthSlider.'px";
-                    contentSlides[i].style.height = "'.$heightSlider.'px";
+                    contentSlides[i].style.width = widthSlider+"px";
+                    contentSlides[i].style.height = heightSlider+"px";
                 }
                 position_slide = nb_total_slide;
             } else {
@@ -72,6 +76,6 @@ function changeSlide_manuel(direction){
         default:
             alert("ERREUR 0XSL02");
     }
-    timerSlide = setInterval("changeSlide()", '.$slideSpeed.');
+    timerSlide = setInterval("changeSlide()", speedSlider);
     return false;
 }
