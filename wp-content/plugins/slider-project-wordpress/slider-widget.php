@@ -8,6 +8,7 @@ class SliderWidgetAJBJ extends WP_Widget
 
     public function __construct()
     {
+        add_action('admin_enqueue_scripts', array($this, 'scripts'));
         parent::__construct('my_slide_show', 'Slider AJBJ', array(
             'description' => 'Pour afficher un slider dynamique avec transition.'
         ));
@@ -30,6 +31,9 @@ class SliderWidgetAJBJ extends WP_Widget
 
         $checkRadioFlecheCache = ($instance['display_fleche'] == "cache")?"checked":"";
         $checkRadioFlecheVisible = ($instance['display_fleche'] == "visible")?"checked":"";
+
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
+        $image = ! empty( $instance['image'] ) ? $instance['image'] : '';
 
         echo '
             <p>
@@ -65,11 +69,22 @@ class SliderWidgetAJBJ extends WP_Widget
                 <label for="flecheDisplayChoice2">Cachée</label>
             </p>
 		';
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php _e( 'Image:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'image' ); ?>" name="<?php echo $this->get_field_name( 'image' ); ?>" type="text" value="<?php echo esc_url( $image ); ?>" />
+            <button class="upload_image_button button button-primary">Upload Image</button>
+        </p>
+        <?php
     }
 
     public function widget($args, $instance) {
         wp_enqueue_style('slider-project-wordpress-css', trailingslashit(plugins_url('slider-project-wordpress')).'style.css');
-        wp_enqueue_script('slider-project-wordpress-script', trailingslashit(plugins_url('slider-project-wordpress')).'slider-ajbj.js');
+        wp_enqueue_script('slider-project-wordpress-script', trailingslashit(plugins_url('slider-project-wordpress')).'/assets/js/slider-ajbj.js');
         wp_enqueue_script( 'bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'), null, true);
         wp_enqueue_style( 'bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' );
 
@@ -83,6 +98,7 @@ class SliderWidgetAJBJ extends WP_Widget
         $displayFleche = ($displayFleche == "cache")?"none":"block";
         $displayTitle = ($positionTitle == "cache")?"none":"block";
         $positionTitle = ($positionTitle == "haut")?"top":"bottom";
+
 
         echo '
         <div class="content-slider" style="width: '.$widthSlider.'px; '.$heightSlider.'px;">
@@ -113,10 +129,20 @@ class SliderWidgetAJBJ extends WP_Widget
 
     }
 
-    function update($new, $old) {
-        return $new;
+    function update($new_instance, $old) {
+        $instance = array();
+        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['image'] = ( ! empty( $new_instance['image'] ) ) ? $new_instance['image'] : '';
+
+        return $instance;
     }
 
+    public function scripts()
+    {
+        wp_enqueue_script( 'media-upload' );
+        wp_enqueue_media();
+        wp_enqueue_script('our_admin', trailingslashit(plugins_url('slider-project-wordpress')) . '/assets/js/our_admin.js', array('jquery'));
+    }
 
 
 
