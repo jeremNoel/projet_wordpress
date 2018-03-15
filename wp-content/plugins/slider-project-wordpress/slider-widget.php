@@ -77,7 +77,10 @@ class SliderWidgetAJBJ extends WP_Widget
             <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg\'); background-size: cover;">
                 <div class="titreSlide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#La tête de mort de l\'enfer</div>
             </div>
-            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background-size: cover; background: url(\'https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg\');">
+            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background-color: red; background-size: cover; ">
+                <div class="titreSlide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#La tête de mort de l\'enfer</div>
+            </div>
+            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg\'); background-size: cover;">
                 <div class="titreSlide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#La tête de mort de l\'enfer</div>
             </div>
             <!-- FIN DES SLIDES  -->
