@@ -6,7 +6,7 @@ var widthSlider = document.getElementById("bloc_slider").getAttribute("data-widt
 var heightSlider = document.getElementById("bloc_slider").getAttribute("data-height");
 var speedSlider = document.getElementById("bloc_slider").getAttribute("data-speed");
 
-if(nb_total_slide <= 1){
+if(nb_total_slide <= 0){
     document.getElementById("fleche-gauche-slide").style.display ="none";
     document.getElementById("fleche-droite-slide").style.display ="none";
 }
@@ -47,7 +47,7 @@ function changeSlide(){
 var timerSlide = setInterval("changeSlide()", speedSlider);
 
 function changeSlide_manuel(direction){
-    if(nb_total_slide > 1){
+    if(nb_total_slide > 0){
         clearInterval(timerSlide);
         switch(direction){
             case 0:
