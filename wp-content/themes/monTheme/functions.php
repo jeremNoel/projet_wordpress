@@ -24,7 +24,7 @@ function header_widgets_init() {
  register_sidebar( array(
 
  'name' => 'Zone de widget pour header',
- 'id' => 'widget-header',
+ 'id' => 'widget-body',
  'before_widget' => '<div class="nwa-widget">',
  'after_widget' => '</div>',
  'before_title' => '<h2 class="widget-title">',
