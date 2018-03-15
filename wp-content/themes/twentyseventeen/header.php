@@ -39,7 +39,15 @@
 		<?php endif; ?>
 
 	</header><!-- #masthead -->
-
+<div class="site-content-contain">
+		<div id="content" class="site-content">
+		 <!-- ajout de ma nouvelle widget area -->
+			 <?php if ( is_active_sidebar( 'widget-header' ) ) : ?>
+			 <div id="header-widget-area" class="widget-header-content widget-area" role="complementary">
+			 <?php dynamic_sidebar( 'widget-header' ); ?>
+			 </div>
+			 <?php endif; ?>
+		 <!-- fin nouvelle widget area -->
 	<?php
 
 	/*
@@ -53,5 +61,4 @@
 	endif;
 	?>
 
-	<div class="site-content-contain">
-		<div id="content" class="site-content">
+	

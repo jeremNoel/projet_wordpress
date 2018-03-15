@@ -18,5 +18,20 @@ function my_theme_enqueue_styles() {
     );
 }
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+
+function header_widgets_init() {
+ 
+ register_sidebar( array(
+
+ 'name' => 'Zone de widget pour header',
+ 'id' => 'widget-header',
+ 'before_widget' => '<div class="nwa-widget">',
+ 'after_widget' => '</div>',
+ 'before_title' => '<h2 class="widget-title">',
+ 'after_title' => '</h2>',
+ ) );
+}
+
+add_action( 'widgets_init', 'header_widgets_init' );
  ?>
 
