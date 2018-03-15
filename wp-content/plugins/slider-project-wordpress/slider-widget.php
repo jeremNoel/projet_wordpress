@@ -21,6 +21,11 @@ class SliderWidgetAJBJ extends WP_Widget
             'speed_slide' => '3'
         );
         $instance = wp_parse_args($instance, $default);
+        $image = '';
+        if(isset($instance['image']))
+        {
+            $image = $instance['image'];
+        }
 
         echo '
             <p>
@@ -38,6 +43,22 @@ class SliderWidgetAJBJ extends WP_Widget
             <p>
                 <label for="'.$this->get_field_name('speed_slide').'">Vitesse de défilement :</label>
 			    <input id="'.$this->get_field_id('speed_slide').'" name="'.$this->get_field_name('speed_slide').'" value="'.$instance['speed_slide'].'" type="text"/>
+            </p>
+            <p>
+                <label for="'.$this->get_field_name('image').'">Image :</label>
+                <input name="'.$this->get_field_name('image').'" id="'.$this->get_field_id('image').'" class="widefat" type="text" size="36"  value="'.esc_url($image).'" />
+                <input class="upload_image_button" type="button" value="Upload Image" />
+            </p>
+            <p>
+                <img src='.$instance['image'].'>
+            </p>
+
+            <p>
+                <label for="'.$this->get_field_name('image').'">Image :</label>
+                <input name="'.$this->get_field_name('image').'" id="'.$this->get_field_id('image').'" class="widefat image-url" type="hidden" size="36" value="'.esc_url( $image ).'" />
+                <input class="upload-image-btn button button-primary" type="button" value="Upload Image" />
+                <img src="'.esc_url($image).'" class="image-preview '.$image == '' ? ' hidden' : ''.'">
+                <input class="remove-image-btn button button-error'.$image == '' ? ' hidden' : ''.'" type="button" value="Remove Image" />
             </p>
 		';
     }

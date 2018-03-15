@@ -22,6 +22,7 @@ class sliderProjectWordPress {
         register_activation_hook(__FILE__, array('sliderProjectWordPress', 'install'));
         register_uninstall_hook(__FILE__, array('sliderProjectWordPress', 'uninstall'));
         add_action('wp_loaded', array($this, 'save_email'));
+        add_action('admin_enqueue_scripts', array ($this, 'mfc_assets'));
     }
 
     public static function install() {
@@ -43,6 +44,13 @@ class sliderProjectWordPress {
                 $wpdb->insert("{$wpdb->prefix}ma_newsletter_list", array('email' => $email));
             }
         }
+    }
+
+    public function mfc_assets(){
+        wp_enqueue_script('media_upload');
+        wp_enqueue_script('thickbox');
+        wp_enqueue_script('mcf-media-upload', plugin_dir_url(__FILE__). 'mfc-media-upload.js', array('jquery'));
+        wp_enqueue_style('thickbox');
     }
 
 }
