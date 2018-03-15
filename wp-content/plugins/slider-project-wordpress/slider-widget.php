@@ -17,7 +17,7 @@ class SliderWidgetAJBJ extends WP_Widget
         $default = array(
             'width' => '1100',
             'height' => '350',
-            'speed_transition' => '0.3',
+            'speed_transition' => '1',
             'speed_slide' => '3',
             'position_title' => 'haut'
         );
