@@ -24,6 +24,13 @@ class SliderWidgetAJBJ extends WP_Widget
         );
         $instance = wp_parse_args($instance, $default);
 
+        $checkRadioTitleHaut = ($instance['position_title'] == "haut")?"checked":"";
+        $checkRadioTitleBas = ($instance['position_title'] == "bas")?"checked":"";
+        $checkRadioTitleCache = ($instance['position_title'] == "cache")?"checked":"";
+
+        $checkRadioFlecheCache = ($instance['display_fleche'] == "cache")?"checked":"";
+        $checkRadioFlecheVisible = ($instance['display_fleche'] == "visible")?"checked":"";
+
         echo '
             <p>
                 <label for="'.$this->get_field_name('width').'">Largeur :</label>
@@ -43,18 +50,18 @@ class SliderWidgetAJBJ extends WP_Widget
             </p>
             <p>
                 La position actuelle est <strong>'.$instance['position_title'].'</strong> :
-                <input type="radio" id="positionChoice1" name="'.$this->get_field_name('position_title').'" value="haut">
+                <input type="radio" id="positionChoice1" name="'.$this->get_field_name('position_title').'" value="haut" '.$checkRadioTitleHaut.'>
                 <label for="positionChoice1">Haut</label>
-                <input type="radio" id="positionChoice2" name="'.$this->get_field_name('position_title').'" value="bas">
+                <input type="radio" id="positionChoice2" name="'.$this->get_field_name('position_title').'" value="bas" '.$checkRadioTitleBas.'>
                 <label for="positionChoice2">Bas</label>
-                <input type="radio" id="positionChoice3" name="'.$this->get_field_name('position_title').'" value="cache">
+                <input type="radio" id="positionChoice3" name="'.$this->get_field_name('position_title').'" value="cache" '.$checkRadioTitleCache.'>
                 <label for="positionChoice3">Caché</label>
             </p>
             <p>
                 La position actuelle est <strong>'.$instance['display_fleche'].'</strong> :
-                <input type="radio" id="flecheDisplayChoice1" name="'.$this->get_field_name('position_title').'" value="visible">
+                <input type="radio" id="flecheDisplayChoice1" name="'.$this->get_field_name('display_fleche').'" value="visible" '.$checkRadioFlecheVisible.'>
                 <label for="flecheDisplayChoice1">Visible</label>
-                <input type="radio" id="flecheDisplayChoice2" name="'.$this->get_field_name('position_title').'" value="cache">
+                <input type="radio" id="flecheDisplayChoice2" name="'.$this->get_field_name('display_fleche').'" value="cache" '.$checkRadioFlecheCache.'>
                 <label for="flecheDisplayChoice2">Cachée</label>
             </p>
 		';
@@ -73,7 +80,7 @@ class SliderWidgetAJBJ extends WP_Widget
         $positionTitle = apply_filters('widget_title', $instance['position_title']);
         $displayFleche = apply_filters('widget_title', $instance['display_fleche']);
 
-        $displayFleche = ($positionTitle == "cache")?"none":"block";
+        $displayFleche = ($displayFleche == "cache")?"none":"block";
         $displayTitle = ($positionTitle == "cache")?"none":"block";
         $positionTitle = ($positionTitle == "haut")?"top":"bottom";
 
