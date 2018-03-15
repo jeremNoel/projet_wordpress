@@ -1,0 +1,13 @@
+.slide {
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.titreSlide {
+    position: absolute;
+    color: white;
+    font-size: 2em;
+    background-color: rgba(0,0,0,0.5);
+    padding: 7.5px 55px;
+}

@@ -18,7 +18,8 @@ class SliderWidgetAJBJ extends WP_Widget
             'width' => '1100',
             'height' => '350',
             'speed_transition' => '0.3',
-            'speed_slide' => '3'
+            'speed_slide' => '3',
+            'position_title' => 'haut'
         );
         $instance = wp_parse_args($instance, $default);
 
@@ -39,17 +40,33 @@ class SliderWidgetAJBJ extends WP_Widget
                 <label for="'.$this->get_field_name('speed_slide').'">Vitesse de défilement :</label>
 			    <input id="'.$this->get_field_id('speed_slide').'" name="'.$this->get_field_name('speed_slide').'" value="'.$instance['speed_slide'].'" type="text"/>
             </p>
+            <p>
+                La position actuelle est <strong>'.$instance['position_title'].'</strong> :
+                <input type="radio" id="positionChoice1" name="'.$this->get_field_name('position_title').'" value="haut">
+                <label for="positionChoice1">Haut</label>
+                <input type="radio" id="positionChoice2" name="'.$this->get_field_name('position_title').'" value="bas">
+                <label for="positionChoice2">Bas</label>
+                <input type="radio" id="positionChoice3" name="'.$this->get_field_name('position_title').'" value="cache">
+                <label for="positionChoice3">Caché</label>
+            </p>
 		';
     }
 
     public function widget($args, $instance) {
+        wp_enqueue_style('slider-project-wordpress-css', trailingslashit(plugins_url('slider-project-wordpress')).'style.css');
+        wp_enqueue_script('slider-project-wordpress-script', trailingslashit(plugins_url('slider-project-wordpress')).'slider-ajbj.js');
+
         $widthSlider =  apply_filters('widget_title', $instance['width']);
         $heightSlider = apply_filters('widget_title', $instance['height']);
-        $transitionSpeed = apply_filters('widget_title', $instance['speed_transition'])*1000;
+        $transitionSpeed = apply_filters('widget_title', $instance['speed_transition']);
         $slideSpeed = apply_filters('widget_title', $instance['speed_slide'])*1000;
+        $positionTitle = apply_filters('widget_title', $instance['position_title']);
+
+        $displayTitle = ($positionTitle == "cache")?"none":"block";
+        $positionTitle = ($positionTitle == "haut")?"top":"bottom";
 
         echo '
-        <div id="bloc_slider" style="width: '.$widthSlider.'px; '.$heightSlider.'px; margin: auto;">
+        <div id="bloc_slider" data-width="'.$widthSlider.'" data-height="'.$heightSlider.'" data-speed="'.$slideSpeed.'" style="width: '.$widthSlider.'px; '.$heightSlider.'px; margin: auto;">
             <div id="slide_fleche_gauche" class="slide_fleche" onClick=" return changeSlide_manuel(0);">
                 <span class="oi oi-chevron-left"></span>
             </div>
@@ -57,100 +74,17 @@ class SliderWidgetAJBJ extends WP_Widget
                 <span class="oi oi-chevron-right"></span>
             </div>
             <!-- DEBUT DES SLIDES  -->
-            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; position: absolute; transition: 1s; overflow: hidden; cursor: pointer; background-color: red; background-size: '.$widthSlider.'px '.$heightSlider.'px;">
-                <div class="titreSlide" style="position: absolute; bottom: 0; color: white; width: '.$widthSlider.'px; font-size: 2em; background-color: rgba(0,0,0,0.5); padding: 7.5px 55px;">#La tête de mort de l\'enfer</div>
+            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg\'); background-size: cover;">
+                <div class="titreSlide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#La tête de mort de l\'enfer</div>
             </div>
-            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; position: absolute; transition: 1s; overflow: hidden; cursor: pointer; background-color: green; background-size: '.$widthSlider.'px '.$heightSlider.'px;">
-                <div class="titreSlide" style="position: absolute; bottom: 0; color: white; width: '.$widthSlider.'px; font-size: 2em; background-color: rgba(0,0,0,0.5); padding: 7.5px 55px;">#La tête de blabloubla mort de l\'enfer</div>
+            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background-color: red; background-size: cover; ">
+                <div class="titreSlide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#La tête de mort de l\'enfer</div>
             </div>
-            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; position: absolute; transition: 1s; overflow: hidden; cursor: pointer; background-color: blue; background-size: '.$widthSlider.'px '.$heightSlider.'px;">
-                <div class="titreSlide" style="position: absolute; bottom: 0; color: white; width: '.$widthSlider.'px; font-size: 2em; background-color: rgba(0,0,0,0.5); padding: 7.5px 55px;">#La tête de blabloubla mort de l\'enfer</div>
-            </div>
-            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; position: absolute; transition: 1s; overflow: hidden; cursor: pointer; background-color: yellow; background-size: '.$widthSlider.'px '.$heightSlider.'px;">
-                <div class="titreSlide" style="position: absolute; bottom: 0; color: white; width: '.$widthSlider.'px; font-size: 2em; background-color: rgba(0,0,0,0.5); padding: 7.5px 55px;">#La tête de blabloubla mort de l\'enfer</div>
+            <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg\'); background-size: cover;">
+                <div class="titreSlide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#La tête de mort de l\'enfer</div>
             </div>
             <!-- FIN DES SLIDES  -->
         </div>
-		
-		<script type="text/javascript">
-            var contentSlides = document.getElementById("bloc_slider").getElementsByClassName("slide");
-            var position_slide = contentSlides.length-1;
-            var nb_total_slide = position_slide;
-    
-            function setChange_toSlide(numberSlide, parameter){
-                switch(parameter){
-                    case 0:
-                        if(numberSlide%2 == 0){
-                            contentSlides[numberSlide].style.width = "0px";
-                        } else {
-                            contentSlides[numberSlide].style.height = "0px";
-                        }
-                        break;
-                    case 1:
-                        if(numberSlide%2 == 0){
-                            contentSlides[numberSlide].style.width = "'.$widthSlider.'px";
-                        } else {
-                            contentSlides[numberSlide].style.height = "'.$heightSlider.'px";
-                        }
-                        break;
-                    default: alert(\'ERREUR 0XSL01\');
-                }
-            }
-    
-            function changeSlide(){
-                if(position_slide == 0){
-                    for(var i=0; i < nb_total_slide+1; i++){
-                        contentSlides[i].style.width = "'.$widthSlider.'px";
-                        contentSlides[i].style.height = "'.$heightSlider.'px";
-                    }
-                    position_slide = nb_total_slide;
-                } else {
-                    setChange_toSlide(position_slide, 0);
-                    position_slide--;
-                }
-            }
-    
-            var timerSlide = setInterval("changeSlide()", '.$slideSpeed.');
-    
-            function changeSlide_manuel(direction){
-                clearInterval(timerSlide);
-                switch(direction){
-                    case 0:
-                        if(position_slide == nb_total_slide){
-                            for(var i = position_slide; i > 0 ; i--){
-                                setChange_toSlide(i, 0);
-                            }
-                            position_slide = 0;
-                        } else if(position_slide == 0){
-                            position_slide+=1;
-                            setChange_toSlide(position_slide, 1);
-                        } else {
-                            position_slide+=1;
-                            setChange_toSlide(position_slide, 1);
-                        }
-                        break;
-                    case 1:
-                        if(position_slide == nb_total_slide){
-                            setChange_toSlide(position_slide, 0);
-                            position_slide -= 1;
-                        } else if (position_slide == 0){
-                            for(var i=0; i < nb_total_slide+1; i++){
-                                contentSlides[i].style.width = "'.$widthSlider.'px";
-                                contentSlides[i].style.height = "'.$heightSlider.'px";
-                            }
-                            position_slide = nb_total_slide;
-                        } else {
-                            setChange_toSlide(position_slide, 0);
-                            position_slide -= 1;
-                        }
-                        break;
-                    default:
-                        alert("ERREUR 0XSL02");
-                }
-                timerSlide = setInterval("changeSlide()", '.$slideSpeed.');
-                return false;
-            }
-        </script>
 		';
 
         echo $args['after_widget'];
