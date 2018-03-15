@@ -42,11 +42,11 @@
 <div class="site-content-contain">
 		<div id="content" class="site-content">
 		 <!-- new widget area-->
-			 <?php if (is_active_sidebar('widget-body')) { ?>
+			 <?php if (is_active_sidebar('widget-body')) : ?>
 				 <div id="body-widget-area" class="widget-header-content widget-area" role="complementary">
 				 <?php dynamic_sidebar('widget-body'); ?>
 				 </div>
-			 <?php } ?>
+			 <?php endif; ?>
 		 <!-- end of widget area -->
 	<?php
 
