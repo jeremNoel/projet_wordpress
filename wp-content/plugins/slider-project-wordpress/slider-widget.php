@@ -94,6 +94,8 @@ class SliderWidgetAJBJ extends WP_Widget
         $slideSpeed = apply_filters('widget_title', $instance['speed_slide'])*1000;
         $positionTitle = apply_filters('widget_title', $instance['position_title']);
         $displayFleche = apply_filters('widget_title', $instance['display_fleche']);
+        $urlImage = apply_filters('widget_title', $instance['image']);
+        $title = apply_filters('widget_title', $instance['title']);
 
         $displayFleche = ($displayFleche == "cache")?"none":"block";
         $displayTitle = ($positionTitle == "cache")?"none":"block";
@@ -110,14 +112,8 @@ class SliderWidgetAJBJ extends WP_Widget
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="line-height: '.$heightSlider.'px;"></span>
                 </div>
                 <!-- DEBUT DES SLIDES  -->
-                <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg\'); background-size: cover;">
-                    <div class="titre-slide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#Le paysage somptueux</div>
-                </div>
-                <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://ae01.alicdn.com/kf/HTB1CpGDNFXXXXXTaXXXq6xXFXXXx/HD-foto-Poster-Astronauten-woondecoratie-Astronauten-op-de-maan-Stof-Doek-Gerold-Wall-Poster-90X60-cm.jpg\'); background-size: cover;">
-                    <div class="titre-slide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#L\'espace fantastiquement fantastique</div>
-                </div>
-                <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\'https://cnet2.cbsistatic.com/img/KIB_CsbuJy1QgjzPCGBEwUfZYAo=/1600x900/2017/09/12/55df1d00-f09e-44fe-af5a-e81cceea595f/iphone-x.jpg\'); background-size: cover;">
-                    <div class="titre-slide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#Le bullshit de l\'année 2017</div>
+                <div class="slide" style="width: '.$widthSlider.'px; height: '.$heightSlider.'px; transition: '.$transitionSpeed.'s; background: url(\''.$urlImage.'\'); background-size: cover;">
+                    <div class="titre-slide" style="'.$positionTitle.': 0; width: '.$widthSlider.'px; display:'.$displayTitle.'">#'.$title.'</div>
                 </div>
                 <!-- FIN DES SLIDES  -->
             </div>
@@ -130,11 +126,7 @@ class SliderWidgetAJBJ extends WP_Widget
     }
 
     function update($new_instance, $old) {
-        $instance = array();
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['image'] = ( ! empty( $new_instance['image'] ) ) ? $new_instance['image'] : '';
-
-        return $instance;
+        return $new_instance;
     }
 
     public function scripts()
