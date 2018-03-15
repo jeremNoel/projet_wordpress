@@ -1,13 +1,32 @@
-.slide {
-    position: absolute;
-    overflow: hidden;
-    cursor: pointer;
+.content-slider {
+    margin: auto;
 }
 
-.titreSlide {
-    position: absolute;
-    color: white;
-    font-size: 2em;
-    background-color: rgba(0,0,0,0.5);
-    padding: 7.5px 55px;
-}
+    .content-slider > #bloc_slider {
+        position: absolute;
+    }
+        .content-slider > #bloc_slider > .slide {
+            position: absolute;
+            overflow: hidden;
+            cursor: pointer;
+        }
+            .content-slider > #bloc_slider > .slide > .titre-slide {
+                position: absolute;
+                color: white;
+                font-size: 2em;
+                background-color: rgba(0,0,0,0.3);
+                padding: 7.5px 55px;
+            }
+    .content-slider > #bloc_slider > .fleche-slide {
+        position: absolute;
+        z-index: 1;
+        background-color: rgba(0,0,0,0.7);
+        cursor: pointer;
+        color: white;
+        font-size: 2em;
+        padding: 0 7.5px;
+    }
+
+    .content-slider > #bloc_slider > #fleche-droite-slide {
+        right: 0;
+    }
