@@ -5,7 +5,6 @@
  */
 class SliderWidgetAJBJ extends WP_Widget
 {
-
     public function __construct()
     {
         add_action('admin_enqueue_scripts', array($this, 'scripts'));
